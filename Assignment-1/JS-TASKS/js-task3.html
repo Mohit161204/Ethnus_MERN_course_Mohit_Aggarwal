@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiply & Divide</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 350px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #ffcc00;
+    }
+
+    input {
+      width: 90%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      outline: none;
+      border-radius: 6px;
+      text-align: center;
+      margin-bottom: 15px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button {
+      width: 45%;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .multiply-btn {
+      background: #ffcc00;
+      color: #222;
+    }
+
+    .multiply-btn:hover {
+      background: #e6b800;
+      transform: scale(1.05);
+    }
+
+    .divide-btn {
+      background: #ff5733;
+      color: white;
+    }
+
+    .divide-btn:hover {
+      background: #cc4629;
+      transform: scale(1.05);
+    }
+
+    .output {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffcc00;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Multiply & Divide</h2>
+    <input type="number" id="num1" placeholder="Enter first number">
+    <input type="number" id="num2" placeholder="Enter second number">
+    <div class="btn-group">
+      <button class="multiply-btn" onclick="multiply()">Multiply</button>
+      <button class="divide-btn" onclick="divide()">Divide</button>
+    </div>
+    <div id="output" class="output"></div>
+  </div>
+
+  <script>
+    function multiply() {
+      let num1 = parseFloat(document.getElementById('num1').value);
+      let num2 = parseFloat(document.getElementById('num2').value);
+      let outputField = document.getElementById('output');
+
+      if (!isNaN(num1) && !isNaN(num2)) {
+        outputField.textContent = `Multiplication: ${num1 * num2}`;
+      } else {
+        outputField.textContent = 'Please enter valid numbers!';
+      }
+      outputField.classList.add("visible");
+    }
+
+    function divide() {
+      let num1 = parseFloat(document.getElementById('num1').value);
+      let num2 = parseFloat(document.getElementById('num2').value);
+      let outputField = document.getElementById('output');
+
+      if (!isNaN(num1) && !isNaN(num2)) {
+        if (num2 !== 0) {
+          outputField.textContent = `Division: ${num1 / num2}`;
+        } else {
+          outputField.textContent = 'Cannot divide by zero!';
+        }
+      } else {
+        outputField.textContent = 'Please enter valid numbers!';
+      }
+      outputField.classList.add("visible");
+    }
+  </script>
+
+</body>
+
+</html>
