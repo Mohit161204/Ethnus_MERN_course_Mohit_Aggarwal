@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Form Validation</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #283048, #859398);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      width: 350px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    h2 {
+      color: #ffcc00;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: none;
+      box-sizing: border-box;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      outline: none;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .error {
+      color: #ff4444;
+      font-size: 0.85em;
+      margin-top: 3px;
+      display: block;
+    }
+
+    .error-border {
+      border: 2px solid #ff4444;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #ffcc00;
+      color: black;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .submit-btn:hover {
+      background: #e6b800;
+      transform: scale(1.05);
+    }
+
+    .success {
+      color: #00ff00;
+      font-size: 1.1em;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="form-container">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Enter Name">
+        <span class="error" id="nameError"></span>
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Enter Email">
+        <span class="error" id="emailError"></span>
+      </div>
+      <div class="form-group">
+        <input type="url" id="website" placeholder="Website URL">
+        <span class="error" id="websiteError"></span>
+      </div>
+      <div class="form-group">
+        <textarea id="message" placeholder="Your Message" rows="4"></textarea>
+        <span class="error" id="messageError"></span>
+      </div>
+      <button type="button" class="submit-btn" onclick="validateForm()">Submit</button>
+      <div id="successMessage" class="success"></div>
+    </form>
+  </div>
+
+  <script>
+    function validateEmail(email) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    }
+
+    function validateURL(url) {
+      const urlPattern = /^(https?:\/\/)[^\s$.?#].[^\s]*$/;
+      return urlPattern.test(url);
+    }
+
+    function validateForm() {
+      let name = document.getElementById('name');
+      let email = document.getElementById('email');
+      let website = document.getElementById('website');
+      let message = document.getElementById('message');
+
+      let nameError = document.getElementById('nameError');
+      let emailError = document.getElementById('emailError');
+      let websiteError = document.getElementById('websiteError');
+      let messageError = document.getElementById('messageError');
+      let successMessage = document.getElementById('successMessage');
+
+      let isValid = true;
+
+      // Reset errors
+      name.classList.remove('error-border');
+      email.classList.remove('error-border');
+      website.classList.remove('error-border');
+      message.classList.remove('error-border');
+
+      nameError.textContent = "";
+      emailError.textContent = "";
+      websiteError.textContent = "";
+      messageError.textContent = "";
+      successMessage.textContent = "";
+
+      // Validate Name
+      if (name.value.trim() === "") {
+        nameError.textContent = "Name cannot be empty!";
+        name.classList.add('error-border');
+        isValid = false;
+      }
+
+      // Validate Email
+      if (email.value.trim() === "") {
+        emailError.textContent = "Email is required!";
+        email.classList.add('error-border');
+        isValid = false;
+      } else if (!validateEmail(email.value.trim())) {
+        emailError.textContent = "Invalid email format!";
+        email.classList.add('error-border');
+        isValid = false;
+      }
+
+      // Validate Website URL
+      if (website.value.trim() === "") {
+        websiteError.textContent = "Website URL is required!";
+        website.classList.add('error-border');
+        isValid = false;
+      } else if (!validateURL(website.value.trim())) {
+        websiteError.textContent = "Invalid URL format!";
+        website.classList.add('error-border');
+        isValid = false;
+      }
+
+      // Validate Message
+      if (message.value.trim() === "") {
+        messageError.textContent = "Message cannot be empty!";
+        message.classList.add('error-border');
+        isValid = false;
+      }
+
+      // If all fields are valid
+      if (isValid) {
+        successMessage.textContent = "Form submitted successfully!";
+        document.getElementById("contactForm").reset();
+      }
+    }
+  </script>
+
+</body>
+
+</html>
