@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date & Time (IST)</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 350px;
+      backdrop-filter: blur(10px);
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #ffcc00;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    button {
+      width: 45%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .date-btn {
+      background: #ffcc00;
+      color: #222;
+    }
+
+    .date-btn:hover {
+      background: #e6b800;
+      transform: scale(1.05);
+    }
+
+    .time-btn {
+      background: #ff5733;
+      color: white;
+    }
+
+    .time-btn:hover {
+      background: #cc4629;
+      transform: scale(1.05);
+    }
+
+    .output {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffcc00;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Current Date & Time</h2>
+    <div class="btn-group">
+      <button class="date-btn" onclick="showDate()">Show Date</button>
+      <button class="time-btn" onclick="showTime()">Show Time (IST)</button>
+    </div>
+    <div id="output" class="output"></div>
+  </div>
+
+  <script>
+    function showDate() {
+      let now = new Date();
+      let day = String(now.getDate()).padStart(2, '0'); 
+      let month = String(now.getMonth() + 1).padStart(2, '0'); 
+      let year = now.getFullYear();
+      let formattedDate = `${day}/${month}/${year}`;
+      let outputField = document.getElementById('output');
+      outputField.textContent = `Current Date: ${formattedDate}`;
+      outputField.classList.add("visible");
+    }
+
+    function showTime() {
+      let options = { timeZone: 'Asia/Kolkata', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      let currentTime = new Date().toLocaleTimeString('en-US', options);
+      let outputField = document.getElementById('output');
+      outputField.textContent = `Current Time (IST): ${currentTime}`;
+      outputField.classList.add("visible");
+    }
+  </script>
+
+</body>
+
+</html>
